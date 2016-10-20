@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Live Image Editing with Web Workers</title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="javascripts/processor.js"></script>
+  </head>
+  <body>
+    <img src="images/Vista_de_Iquique,_Chile,_2016-02-11,_DD_20.jpg"/>
+    <canvas></canvas>
+    <dl>
+      <dt>Brightness</dt>
+      <dd>
+        <input type="range" min="-50" max="50" value="0" name="brightness" step="1"/>
+        <span>0%</span>
+      </dd>
+
+      <dt>Saturation</dt>
+      <dd>
+        <input type="range" min="-100" max="100" value="0" name="saturation" step="1"/>
+        <span>0%</span>
+      </dd>
+    </dl>
+    <ul id="tools">
+      <li><a data-method="inverter" href="#">Invert</a></li>
+      <li><a data-method="horiz_flipper" href="#">Horizontal Flip</a></li>
+      <li><a data-method="vert_flipper" href="#">Vertical Flip</a></li>
+    </ul>
+  </body>
+</html>
