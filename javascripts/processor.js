@@ -9,11 +9,13 @@ var workers = {
 $(window).on("load", function() {
   var canvas = $("canvas").get(0),
       img = $("img").remove().get(0),
-      ctx = canvas.getContext("2d");
+      ctx = canvas.getContext("2d"),
+      last_data;
 
   canvas.width = img.width; // set canvas dimensions to image dimensions
   canvas.height = img.height;
   ctx.drawImage(img, 0, 0); // draw image to the canvas
+  last_data = getData(ctx);
 
   // attach message event listener to each worker
   for (var worker in workers) {
@@ -29,6 +31,15 @@ $(window).on("load", function() {
         worker = workers[$(e.target).attr("data-method")];
 
     worker.postMessage(data);
+  });
+
+  $("input[type=range]").on("input", function(e) { // attach input event to range sliders
+    var $e = $(this);
+    $e.next("span").text($e.val() + "%"); // update text in span element next to slider
+    workers[$e.attr("name")].postMessage({
+      image_data: last_data,
+      param: $e.val()
+    });
   });
 
   function getData(ctx) { // image data from canvas context
